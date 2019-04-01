@@ -242,10 +242,12 @@ if(in_array($_GET['action'], array('ap', 'ct')))
 //Discover USB/Serial devices - JT2019
 if($_GET['action'] == 'cablediscover')
 {
-	#ob_start();
-	#system("lsusb", $retCableDiscover);
-	#$returnedJson = ob_get_clean();
-	#if($retCableDiscover == 0*) echo $returnedJson;
+	ob_start();
+	system("lsusb", $retStatus);
+	$returnedJson = ob_get_clean();
+	if($retStatus == 0) echo $returnedJson;
+	else
+	echo "Big fail";
 	exit;
 }
 
