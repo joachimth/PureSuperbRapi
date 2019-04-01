@@ -2,24 +2,8 @@
 softwareVersion=$(git describe --long)
 
 echo -e "\e[1;4;246mRoadApplePi Setup $softwareVersion\e[0m
-Welcome to RoadApplePi setup. RoadApplePi is \"Black Box\" software that
-can be retrofitted into any car with an OBD port. This software is meant
-to be installed on a Raspberry Pi running unmodified Raspbian Stretch,
-but it may work on other OSs or along side other programs and modifications.
-Use with anything other then out-of-the-box Vanilla Raspbain Stretch is not
-supported.
+This script will push the existing db to github, beaware that this can be dangerous or be the source of faults"
 
-This script will download, compile, and install the necessary dependencies
-before finishing installing RoadApplePi itself. Depending on your model of
-Raspberry Pi, this may take several hours.
-"
-
-#################
-# Update System #
-#################
-echo -e "\e[1;4;93mStep 1. Updating system\e[0m"
-sudo apt update
-sudo apt upgrade -y
 
 ###########################################
 # Getting latest version from GitHub      #
