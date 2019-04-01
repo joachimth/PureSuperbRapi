@@ -658,6 +658,159 @@ function powerManagement(mode)
 	
 }
 
+
+
+
+function cbPair()
+{
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+		if (this.readyState == 4 && this.status == 200)
+		{
+			try { pairResponse = JSON.parse(this.responseText); }
+			catch(err)
+			{
+				pairBt.className = "settingsItem settingsButton";
+				pairBt.innerHTML = "Error pairing; tap to try again";
+				pairBt.onclick = function() { btScan(); };
+				return;
+			}
+			
+			//Success
+			if(pairResponse[0])
+			{
+				currentSettings["OBD"] = pairResponse[1];
+				document.getElementById('currentBt').innerHTML = "<span style='font-weight: bold;'>Currently paired device: </span>" + currentSettings["OBD"];
+				
+				pairBt.className = "settingsItem settingsButton";
+				pairBt.innerHTML = "Pair success! Tap to scan again";
+				pairBt.onclick = function() { btScan(); };
+				return;
+			}
+			
+			//Fail
+			else
+			{
+				pairBt.className = "settingsItem settingsButton";
+				pairBt.innerHTML = pairResponse[1] + "; tap to try again";
+				pairBt.onclick = function() { btScan(); };
+				return;
+			}
+			
+			pairBt.className = "settingsItem settingsButton";
+			pairBt.onclick = function() { btScan(); };
+			return;
+		}
+	};
+	
+	btInfo = new FormData();
+	btInfo.append("mac", document.getElementById('deviceName').value);
+	btInfo.append("pin", document.getElementById('pinInput').value);
+	
+	xhttp.open("POST", "dataHandler.php?action=pair", true);
+	xhttp.send(btInfo);
+	
+	pairBt = document.getElementById('pairBt');
+	pairBt.className = "settingsItem settingsButton disabled";
+	pairBt.innerHTML = "Pairing...";
+}
+
+
+function btScan()
+{
+	paircb = document.getElementById('paircb');
+	paircb.onclick = null;
+	paircb.className = "settingsItem settingsButton disabled";
+	paircb.innerHTML = "Scanning..."
+	
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+		if (this.readyState == 4 && this.status == 200)
+		{
+			try { deviceArray = JSON.parse(this.responseText); }
+			catch(err)
+			{
+				paircb.className = "settingsItem settingsButton";
+				paircb.innerHTML = "Error scanning; tap to try again";
+				paircb.onclick = function() { cbScan(); };
+				return;
+			}
+			if(deviceArray.length == 0)
+			{
+				paircb.className = "settingsItem settingsButton";
+				paircb.innerHTML = "No devices found; tap to try again";
+				paircb.onclick = function() { cbScan(); };
+				return;
+			}
+			
+			paircb.className = "settingsItem settingsItemNoClick";
+			paircb.innerHTML = "";
+			
+			discoverLabel = document.createElement('div');
+			discoverLabel.style.fontWeight = "bold";
+			discoverLabel.innerHTML = "Discovered Devices";
+			paircb.appendChild(discoverLabel);
+			
+			deviceName = document.createElement('select');
+			deviceName.style.width = "100%";
+			deviceName.style.background = "none";
+			deviceName.style.height = "30px";
+			deviceName.style.marginBottom = "10px";
+			deviceName.id = "deviceName";
+			
+			newOpt = [];
+			for(i = 0; i < deviceArray.length; i++)
+			{
+				newOpt[i] = document.createElement('option');
+				newOpt[i].value = deviceArray[i][0];
+				newOpt[i].innerHTML = deviceArray[i][1] + " [" + deviceArray[i][0] + "]";
+				deviceName.appendChild(newOpt[i]);
+			}
+			
+			paircb.appendChild(deviceName);
+			
+			pinLabel = document.createElement('div');
+			pinLabel.style.fontWeight = "bold";
+			pinLabel.innerHTML = "PIN Code";
+			paircb.appendChild(pinLabel);
+			
+			
+			pinInput = document.createElement('input');
+			pinInput.type='text';
+			pinInput.id='pinInput';
+			pinInput.style.width = "100%";
+			pinInput.style.float = "none";
+			pinInput.placeholder = "1234";
+			pinInput.style.marginBottom = '10px';
+			paircb.appendChild(pinInput);
+			
+			buttonBox = document.createElement('div');
+			buttonBox.style.textAlign = 'center';
+			paircb.appendChild(buttonBox);
+			
+			rescan = document.createElement('div');
+			rescan.className = "insetButton";
+			rescan.id = "rescan";
+			rescan.innerHTML = "Rescan";
+			rescan.onclick = function() { cbScan(); };
+			buttonBox.appendChild(rescan);
+			
+			pair = document.createElement('div');
+			pair.className = "insetButton";
+			pair.id = "pair";
+			pair.innerHTML = "Pair";
+			pair.onclick = function() { cbPair(); };
+			buttonBox.appendChild(pair);
+			
+		}
+	};
+	xhttp.open("GET", "dataHandler.php?action=cablediscover", true);
+	xhttp.send();
+}
+
+
 function btScan()
 {
 	pairBt = document.getElementById('pairBt');
