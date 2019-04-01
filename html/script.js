@@ -307,9 +307,9 @@ function menuSelect(menuNumber)
 
 				pairCD = document.createElement('div');
 				pairCD.className = "settingsItem settingsButton";
-				pairCD.id = "pairCD";
+				pairCD.id = "cbpair";
 				pairCD.innerHTML = "Scan for devices";
-				pairCD.onClick = function() { CableDiscoverScan(); };
+				pairCD.onClick = function() { cablediscover(); };
 				CableDiscoverList.appendChild(pairCD);
 
 				//Bluetooth
@@ -717,9 +717,9 @@ function cbPair()
 }
 
 
-function btScan()
+function cablediscover()
 {
-	paircb = document.getElementById('paircb');
+	paircb = document.getElementById('cablediscover');
 	paircb.onclick = null;
 	paircb.className = "settingsItem settingsButton disabled";
 	paircb.innerHTML = "Scanning..."
@@ -794,7 +794,7 @@ function btScan()
 			rescan.className = "insetButton";
 			rescan.id = "rescan";
 			rescan.innerHTML = "Rescan";
-			rescan.onclick = function() { cbScan(); };
+			rescan.onclick = function() { cbPair(); };
 			buttonBox.appendChild(rescan);
 			
 			pair = document.createElement('div');
