@@ -1,3 +1,4 @@
+DROP DATABASE roadapplepi;
 CREATE DATABASE roadapplepi;
 GRANT ALL PRIVILEGES ON roadapplepi.* TO 'roadapplepi'@'%' IDENTIFIED BY 'roadapplepi';
 USE roadapplepi;

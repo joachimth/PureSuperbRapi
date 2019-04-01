@@ -58,7 +58,7 @@ fi
 # Install RoadApplePi #
 #######################
 echo -e "\e[1;4;93mStep 4. Building and installing RoadApplePi\e[0m"
-cd ..
+cd ~/PureSuperbRapi
 make
 sudo make install
 
