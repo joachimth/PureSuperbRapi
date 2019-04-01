@@ -671,9 +671,9 @@ function cbPair()
 			try { pairResponse = JSON.parse(this.responseText); }
 			catch(err)
 			{
-				pairBt.className = "settingsItem settingsButton";
-				pairBt.innerHTML = "Error pairing; tap to try again";
-				pairBt.onclick = function() { btScan(); };
+				paircb.className = "settingsItem settingsButton";
+				paircb.innerHTML = "Error pairing; tap to try again";
+				paircb.onclick = function() { cbScan(); };
 				return;
 			}
 			
@@ -683,33 +683,33 @@ function cbPair()
 				currentSettings["OBD"] = pairResponse[1];
 				document.getElementById('currentBt').innerHTML = "<span style='font-weight: bold;'>Currently paired device: </span>" + currentSettings["OBD"];
 				
-				pairBt.className = "settingsItem settingsButton";
-				pairBt.innerHTML = "Pair success! Tap to scan again";
-				pairBt.onclick = function() { btScan(); };
+				paircb.className = "settingsItem settingsButton";
+				paircb.innerHTML = "Pair success! Tap to scan again";
+				paircb.onclick = function() { cbScan(); };
 				return;
 			}
 			
 			//Fail
 			else
 			{
-				pairBt.className = "settingsItem settingsButton";
-				pairBt.innerHTML = pairResponse[1] + "; tap to try again";
-				pairBt.onclick = function() { btScan(); };
+				paircb.className = "settingsItem settingsButton";
+				paircb.innerHTML = pairResponse[1] + "; tap to try again";
+				paircb.onclick = function() { cbScan(); };
 				return;
 			}
 			
-			pairBt.className = "settingsItem settingsButton";
-			pairBt.onclick = function() { btScan(); };
+			paircb.className = "settingsItem settingsButton";
+			paircb.onclick = function() { cbScan(); };
 			return;
 		}
 	};
 	
-	btInfo = new FormData();
-	btInfo.append("mac", document.getElementById('deviceName').value);
-	btInfo.append("pin", document.getElementById('pinInput').value);
+	cbInfo = new FormData();
+	cbInfo.append("mac", document.getElementById('deviceName').value);
+	cbInfo.append("pin", document.getElementById('pinInput').value);
 	
 	xhttp.open("POST", "dataHandler.php?action=pair", true);
-	xhttp.send(btInfo);
+	xhttp.send(cbInfo);
 	
 	pairBt = document.getElementById('pairBt');
 	pairBt.className = "settingsItem settingsButton disabled";
