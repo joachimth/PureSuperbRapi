@@ -247,8 +247,31 @@ if($_GET['action'] == 'cablediscover')
 	$returnedJson = ob_get_clean();
 	if($retStatus == 0) echo $returnedJson;
 	else
-	echo "Big fail";
+	echo 'Big fail';
 	exit;
+}
+
+//Pair USB/Serial devices - JT2019
+if($_GET['action'] == 'cbpair')
+{
+	ob_start();
+	#system("raprun -p ".$_POST['mac']." ".$_POST['pin'], $retStatus);
+	system("lsusb", $retStatus);
+	$exitText = ob_get_clean();
+	
+	if($retStatus == 0)
+	{
+		$toJS = array(true, $exitText);
+		
+		$mysqli = new mysqli('127.0.0.1', 'roadapplepi', 'roadapplepi', 'roadapplepi');
+		$mysqli->query("delete from env where name='currentOBD'");
+		$mysqli->query("insert into env (name, value) values ('currentOBD', '".$mysqli->real_escape_string('Serial')."')");
+		$mysqli->close();
+	}
+	else $toJS = array(false, $exitText);
+	
+	echo json_encode($toJS);
+	exit();
 }
 
 //Discover bluetooth devices
