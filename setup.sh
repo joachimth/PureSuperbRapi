@@ -1,40 +1,34 @@
 #!/bin/bash
 softwareVersion=$(git describe --long)
 
-echo -e "\e[1;4;246mRoadApplePi Setup $softwareVersion\e[0m
-Welcome to RoadApplePi setup. RoadApplePi is \"Black Box\" software that
-can be retrofitted into any car with an OBD port. This software is meant
-to be installed on a Raspberry Pi running unmodified Raspbian Stretch,
-but it may work on other OSs or along side other programs and modifications.
-Use with anything other then out-of-the-box Vanilla Raspbain Stretch is not
-supported.
+#echo -e "\e[1;4;246mRoadApplePi Setup $softwareVersion\e[0m
+#Welcome to RoadApplePi setup. RoadApplePi is \"Black Box\" software that
+#can be retrofitted into any car with an OBD port. This software is meant
+#to be installed on a Raspberry Pi running unmodified Raspbian Stretch,
+#but it may work on other OSs or along side other programs and modifications.
+#Use with anything other then out-of-the-box Vanilla Raspbain Stretch is not
+#supported.
 
-This script will download, compile, and install the necessary dependencies
-before finishing installing RoadApplePi itself. Depending on your model of
-Raspberry Pi, this may take several hours.
-"
+#This script will download, compile, and install the necessary dependencies
+#before finishing installing RoadApplePi itself. Depending on your model of
+#Raspberry Pi, this may take several hours.
+#"
 
 #Prompt user if they want to continue
-read -p "Would you like to continue? (y/N) " answer
-if [ "$answer" == "n" ] || [ "$answer" == "N" ] || [ "$answer" == "" ]
-then
-	echo "Setup aborted"
-	exit
-fi
 
 #################
 # Update System #
 #################
-echo -e "\e[1;4;93mStep 1. Updating system\e[0m"
-sudo apt update
-sudo apt upgrade -y
+#echo -e "\e[1;4;93mStep 1. Updating system\e[0m"
+#sudo apt update
+#sudo apt upgrade -y
 
 ###########################################
 # Install pre-built dependencies from Apt #
 ###########################################
-echo -e "\e[1;4;93mStep 2. Install pre-built dependencies from Apt\e[0m"
-sudo apt install -y dnsmasq hostapd libbluetooth-dev apache2 php7.0 php7.0-mysql php7.0-bcmath mariadb-server libmariadbclient-dev libmariadbclient-dev-compat uvcdynctrl
-sudo systemctl disable hostapd dnsmasq
+#echo -e "\e[1;4;93mStep 2. Install pre-built dependencies from Apt\e[0m"
+#sudo apt install -y dnsmasq hostapd libbluetooth-dev apache2 php7.0 php7.0-mysql php7.0-bcmath mariadb-server libmariadbclient-dev libmariadbclient-dev-compat uvcdynctrl
+#sudo systemctl disable hostapd dnsmasq
 
 ################
 # Build FFMpeg #
