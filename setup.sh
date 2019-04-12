@@ -20,15 +20,15 @@ softwareVersion=$(git describe --long)
 # Update System #
 #################
 #echo -e "\e[1;4;93mStep 1. Updating system\e[0m"
-#sudo apt update
-#sudo apt upgrade -y
+sudo apt update
+sudo apt upgrade -y
 
 ###########################################
 # Install pre-built dependencies from Apt #
 ###########################################
 #echo -e "\e[1;4;93mStep 2. Install pre-built dependencies from Apt\e[0m"
-#sudo apt install -y dnsmasq hostapd libbluetooth-dev apache2 php7.0 php7.0-mysql php7.0-bcmath mariadb-server libmariadbclient-dev libmariadbclient-dev-compat uvcdynctrl
-#sudo systemctl disable hostapd dnsmasq
+sudo apt install -y dnsmasq hostapd libbluetooth-dev apache2 php7.0 php7.0-mysql php7.0-bcmath mariadb-server libmariadbclient-dev libmariadbclient-dev-compat uvcdynctrl
+sudo systemctl disable hostapd dnsmasq
 
 ################
 # Build FFMpeg #
