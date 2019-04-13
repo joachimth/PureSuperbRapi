@@ -48,5 +48,6 @@ sudo mysql < roadapplepi-configd.sql
 
 sleep 5
 echo "Done! Please reboot your Raspberry Pi now"
-echo "Autorebooting now"
-sudo reboot --reboot
+echo "Reboot now"
+#echo "Autorebooting now"
+#sudo reboot --reboot
