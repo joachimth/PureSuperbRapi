@@ -62,7 +62,7 @@ sudo chown -R www-data:www-data /var/www/html
 installDate=$(date)
 cp roadapplepi.sql roadapplepi-configd.sql
 echo "INSERT INTO env (name, value) VALUES (\"rapVersion\", \"$softwareVersion\"), (\"installDate\", \"$installDate\");" >> roadapplepi-configd.sql
-sudo mysql < roadapplepi-configd.sql
+sudo mysql < ~/PureSuperbRapi/roadapplepi-configd.sql
 
 echo -e "\e[1;4;93mDone! You will now be punished to wait 10 seconds before auctual reboot will start\e[0m"
 sleep 10
