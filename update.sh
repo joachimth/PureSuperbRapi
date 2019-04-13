@@ -9,8 +9,8 @@ Beaware that this is a hard update. So no data will exist afterwards."
 # Update System #
 #################
 echo -e "\e[1;4;93mStep 1. Updating system\e[0m"
-#sudo apt update
-#sudo apt upgrade -y
+sudo apt update
+sudo apt upgrade -y
 
 ###########################################
 # Getting latest version from GitHub      #
@@ -23,7 +23,7 @@ git pull
 # Install RoadApplePi #
 #######################
 echo -e "\e[1;4;93mStep 4. Building and installing newest version\e[0m"
-#cd ~/PureSuperbRapi
+cd ~/PureSuperbRapi
 make
 sudo make install
 
