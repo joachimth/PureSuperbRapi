@@ -1,32 +1,21 @@
 #!/bin/bash
 softwareVersion=$(git describe --long)
 
-#echo -e "\e[1;4;246mRoadApplePi Setup $softwareVersion\e[0m
-#Welcome to RoadApplePi setup. RoadApplePi is \"Black Box\" software that
-#can be retrofitted into any car with an OBD port. This software is meant
-#to be installed on a Raspberry Pi running unmodified Raspbian Stretch,
-#but it may work on other OSs or along side other programs and modifications.
-#Use with anything other then out-of-the-box Vanilla Raspbain Stretch is not
-#supported.
-
-#This script will download, compile, and install the necessary dependencies
-#before finishing installing RoadApplePi itself. Depending on your model of
-#Raspberry Pi, this may take several hours.
-#"
-
-#Prompt user if they want to continue
+echo -e "\e[1;4;246mRoadApplePi Setup $softwareVersion\e[0m
+Welcome to PureSuperbRapi setup, a fork of the RoadApplePi.
+"
 
 #################
 # Update System #
 #################
-#echo -e "\e[1;4;93mStep 1. Updating system\e[0m"
+echo -e "\e[1;4;93mStep 1. Updating system\e[0m"
 sudo apt update
 sudo apt upgrade -y
 
 ###########################################
 # Install pre-built dependencies from Apt #
 ###########################################
-#echo -e "\e[1;4;93mStep 2. Install pre-built dependencies from Apt\e[0m"
+echo -e "\e[1;4;93mStep 2. Install pre-built dependencies from Apt\e[0m"
 sudo apt install -y dnsmasq hostapd libbluetooth-dev apache2 php7.0 php7.0-mysql php7.0-bcmath mariadb-server libmariadbclient-dev libmariadbclient-dev-compat uvcdynctrl
 sudo systemctl disable hostapd dnsmasq
 
@@ -75,4 +64,7 @@ cp roadapplepi.sql roadapplepi-configd.sql
 echo "INSERT INTO env (name, value) VALUES (\"rapVersion\", \"$softwareVersion\"), (\"installDate\", \"$installDate\");" >> roadapplepi-configd.sql
 sudo mysql < roadapplepi-configd.sql
 
-echo "Done! Please reboot your Raspberry Pi now"
+echo -e "\e[1;4;93mDone! You will now be punished to wait 10 seconds before auctual reboot will start\e[0m"
+sleep 10
+echo "Autorebooting now"
+sudo reboot --reboot
