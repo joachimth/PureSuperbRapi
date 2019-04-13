@@ -44,7 +44,7 @@ sudo chown -R www-data:www-data /var/www/html
 installDate=$(date)
 cp roadapplepi.sql roadapplepi-configd.sql
 echo "INSERT INTO env (name, value) VALUES (\"rapVersion\", \"$softwareVersion\"), (\"installDate\", \"$installDate\");" >> roadapplepi-configd.sql
-sudo mysql < roadapplepi-configd.sql
+sudo mysql < ~/PureSuperbRapi/roadapplepi-configd.sql
 
 sleep 5
 echo "Done! Please reboot your Raspberry Pi now"
