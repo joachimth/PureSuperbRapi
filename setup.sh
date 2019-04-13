@@ -66,5 +66,5 @@ sudo mysql < roadapplepi-configd.sql
 
 echo -e "\e[1;4;93mDone! You will now be punished to wait 10 seconds before auctual reboot will start\e[0m"
 sleep 10
-echo "Autorebooting now"
-sudo reboot --reboot
+#echo "Autorebooting now"
+#sudo reboot --reboot
