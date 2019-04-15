@@ -26,7 +26,7 @@ if($_GET['action'] == "obdLog")
 {
 	if($_GET['min'] == "" || $_GET['max'] == "") die();
 
-	$mysqli = new mysqli('127.0.0.1', 'roadapplepi', 'roadapplepi', 'roadapplepi');
+	$mysqli = new mysqli('127.0.0.1', 'SuperbPi', 'roadapplepi', 'roadapplepi');
 	if ($mysqli->connect_errno) die("[]");
 
 	$limitString = "timestamp >= ".$_GET['min'].($_GET['max'] == 0 ? "" : " and timestamp < ".$_GET['max']);
