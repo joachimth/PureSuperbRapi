@@ -1,6 +1,6 @@
 DROP DATABASE roadapplepi;
 CREATE DATABASE roadapplepi;
-GRANT ALL PRIVILEGES ON roadapplepi.* TO 'roadapplepi'@'%' IDENTIFIED BY 'roadapplepi';
+GRANT ALL PRIVILEGES ON SuperbPi.* TO 'roadapplepi'@'%' IDENTIFIED BY 'roadapplepi';
 USE roadapplepi;
 CREATE TABLE env (id int NOT NULL auto_increment, name text NOT NULL, value text NOT NULL, PRIMARY KEY(id));
 CREATE TABLE obdCodes (id int NOT NULL auto_increment, timestamp bigint NOT NULL, codes varchar(452) NOT NULL, PRIMARY KEY(id));
